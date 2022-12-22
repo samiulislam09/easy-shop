@@ -12,15 +12,18 @@ import SingleProductPage from "./pages/SingleProductPage";
 function App() {
   return (
     <>
+      <Navbar />
+      <Sidebar />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/about" element={<AboutPage />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
         <Route path="/checkout" element={<CheckoutPage />}></Route>
         <Route path="/products" element={<ProductsPage />}></Route>
-        <Route path="/singleProduct" element={<SingleProductPage />}></Route>
+        <Route path="/products/:id" element={<SingleProductPage />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
+      <Footer />
     </>
   );
 }

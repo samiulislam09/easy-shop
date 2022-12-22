@@ -31,7 +31,9 @@ const Nav = () => {
               <Link to="/products">Products</Link>
             </li>
           </ul>
-          <CartButtons />
+          <div className="cart-btn-wrapper">
+            <CartButtons />
+          </div>
         </div>
       </NavContainer>
     </div>

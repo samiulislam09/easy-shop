@@ -1,7 +1,12 @@
-import React from 'react'
+import React from "react";
+import loaddingImage from "../assets/Loading_icon.gif";
 
 const Loading = () => {
-  return <h4>loading element</h4>
-}
+  return (
+    <div className="section-center">
+      <img src={loaddingImage} alt="loading" />
+    </div>
+  );
+};
 
-export default Loading
+export default Loading;

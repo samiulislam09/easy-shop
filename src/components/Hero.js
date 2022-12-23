@@ -1,73 +1,35 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import heroBcg from '../assets/hero-bcg.jpeg'
-import heroBcg2 from '../assets/hero-bcg-2.jpeg'
+import React from "react";
+import { Link } from "react-router-dom";
+import heroBcg from "../assets/hero-bcg.jpeg";
+import heroBcg2 from "../assets/hero-bcg-2.jpeg";
+import { Wrapper } from "../styles/Hero.Styles";
 
 const Hero = () => {
-  return <h4>hero</h4>
-}
+  return (
+    <div>
+      <Wrapper className="section-center">
+        <article className="content">
+          <h1>
+            Design Your <br />
+            Comfort Zone
+          </h1>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque
+            debitis sapiente, possimus quia cupiditate, eius, quas quod ullam
+            tenetur eaque officia ea. Fugit numquam error ut eligendi explicabo
+            voluptatem ab!
+          </p>
+          <Link to="/products" className="btn hero-btn">
+            Shop Now
+          </Link>
+        </article>
+        <article className="img-container">
+          <img src={heroBcg} alt="" className="main-img" />
+          <img src={heroBcg2} alt="" className="accent-img" />
+        </article>
+      </Wrapper>
+    </div>
+  );
+};
 
-const Wrapper = styled.section`
-  min-height: 60vh;
-  display: grid;
-  place-items: center;
-  .img-container {
-    display: none;
-  }
-
-  p {
-    line-height: 2;
-    max-width: 45em;
-    margin-bottom: 2rem;
-    color: var(--clr-grey-5);
-    font-size: 1rem;
-  }
-  @media (min-width: 992px) {
-    height: calc(100vh - 5rem);
-    grid-template-columns: 1fr 1fr;
-    gap: 8rem;
-    h1 {
-      margin-bottom: 2rem;
-    }
-    p {
-      font-size: 1.25rem;
-    }
-    .hero-btn {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-    }
-    .img-container {
-      display: block;
-      position: relative;
-    }
-    .main-img {
-      width: 100%;
-      height: 550px;
-      position: relative;
-      border-radius: var(--radius);
-      display: block;
-      object-fit: cover;
-    }
-    .accent-img {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 250px;
-      transform: translateX(-50%);
-      border-radius: var(--radius);
-    }
-    .img-container::before {
-      content: '';
-      position: absolute;
-      width: 10%;
-      height: 80%;
-      background: var(--clr-primary-9);
-      bottom: 0%;
-      left: -8%;
-      border-radius: var(--radius);
-    }
-  }
-`
-
-export default Hero
+export default Hero;

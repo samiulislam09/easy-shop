@@ -4,7 +4,7 @@ import reducer from "../reducers/products_reducer";
 import { products_url as url } from "../utils/constants";
 
 const initialState = {
-  isOpen: true,
+  isOpen: false,
 };
 
 const ProductsContext = React.createContext();

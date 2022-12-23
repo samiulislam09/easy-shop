@@ -1,10 +1,23 @@
-import React from 'react'
-import styled from 'styled-components'
-import Product from './Product'
+import React from "react";
+import styled from "styled-components";
+import Product from "./Product";
+import { Link } from "react-router-dom";
 
-const GridView = () => {
-  return <h4>Grid View</h4>
-}
+const GridView = ({ products }) => {
+  return (
+    <Wrapper>
+      <div className="products-container">
+        {products.map((product) => {
+          return (
+            <Link to={`/products/${product.id}`} key={product.id}>
+              <Product product={product} />
+            </Link>
+          );
+        })}
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   img {
@@ -23,9 +36,9 @@ const Wrapper = styled.section`
   }
   @media (min-width: 1170px) {
     .products-container {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
-`
+`;
 
-export default GridView
+export default GridView;

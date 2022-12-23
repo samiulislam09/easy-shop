@@ -26,7 +26,7 @@ const FeaturedProducts = () => {
         </div>
         <div className="section-center featured">
           {featuredProducts.map((product) => (
-            <Link to={`products/${product.id}`} key={product.id}>
+            <Link to={`/products/${product.id}`} key={product.id}>
               <Product product={product} />
             </Link>
           ))}

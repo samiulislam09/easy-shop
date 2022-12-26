@@ -1,13 +1,5 @@
 import React, { useEffect, useContext, useReducer } from "react";
 import reducer from "../reducers/cart_reducer";
-import {
-  ADD_TO_CART,
-  REMOVE_CART_ITEM,
-  TOGGLE_CART_ITEM_AMOUNT,
-  CLEAR_CART,
-  COUNT_CART_TOTALS,
-} from "../actions";
-import { formToJSON } from "axios";
 
 const initialState = {
   cart: JSON.parse(localStorage.getItem("cart")) || [],
@@ -30,12 +22,16 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: "clearCart" });
   };
+  const toggleAmount = (id, value) => {
+    dispatch({ type: "toggleCartAmount", payload: { id, value } });
+  };
   useEffect(() => {
+    dispatch({ type: "countCartTotal" });
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, removeItem, clearCart }}
+      value={{ ...state, addToCart, removeItem, clearCart, toggleAmount }}
     >
       {children}
     </CartContext.Provider>

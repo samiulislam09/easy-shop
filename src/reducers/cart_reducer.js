@@ -1,11 +1,3 @@
-import {
-  ADD_TO_CART,
-  CLEAR_CART,
-  COUNT_CART_TOTALS,
-  REMOVE_CART_ITEM,
-  TOGGLE_CART_ITEM_AMOUNT,
-} from "../actions";
-
 const cart_reducer = (state, action) => {
   switch (action.type) {
     case "addToCart":
@@ -31,10 +23,48 @@ const cart_reducer = (state, action) => {
       return { ...state, cart: filteredItem };
     case "clearCart":
       return { ...state, cart: [] };
+    case "toggleCartAmount":
+      const { id: toggleId, value } = action.payload;
+      console.log("object,", toggleId, value);
+      const tempCart = state.cart.map((item) => {
+        if (item.id === toggleId) {
+          if (value === "increase") {
+            let newAmount = item.amount + 1;
+            if (newAmount > item.max) {
+              newAmount = item.max;
+            }
+            return { ...item, amount: newAmount };
+          }
+          if (value === "decrease") {
+            let newAmount = item.amount - 1;
+            if (newAmount < 1) {
+              newAmount = 1;
+            }
+            return { ...item, amount: newAmount };
+          }
+        } else {
+          return item;
+        }
+      });
+      return { ...state, cart: tempCart };
+    case "countCartTotal":
+      const { totalItems, totalAmount } = state.cart.reduce(
+        (total, cartItem) => {
+          const { amount, price } = cartItem;
+          total.totalItems += amount;
+          total.totalAmount += price * amount;
+          return total;
+        },
+        {
+          totalItems: 0,
+          totalAmount: 0,
+        }
+      );
+      return { ...state, totalItems, totalAmount };
+
     default:
       return state;
   }
-  throw new Error(`No Matching "${action.type}" - action type`);
 };
 
 export default cart_reducer;

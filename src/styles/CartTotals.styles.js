@@ -19,6 +19,7 @@ export const Wrapper = styled.section`
   }
   h4 {
     margin-top: 2rem;
+    font-size: 18px;
   }
   @media (min-width: 776px) {
     justify-content: flex-end;

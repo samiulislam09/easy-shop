@@ -1,13 +1,51 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
+import React, { useContext } from "react";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import { auth } from "../firebase.init";
+import { useSignOut } from "react-firebase-hooks/auth";
 
-const UserContext = React.createContext()
+const UserContext = React.createContext();
 export const UserProvider = ({ children }) => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, user2, loading2, error2] = useSignInWithGoogle(auth);
+  const [createUserWithEmailAndPassword] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [signOut] = useSignOut(auth);
+
+  const emailPasswordLogin = (email, passowrd) => {
+    signInWithEmailAndPassword(email, passowrd);
+  };
+  const googleLogin = () => {
+    signInWithGoogle();
+  };
+  const signOutUser = async () => {
+    await signOut();
+    console.log("first");
+  };
   return (
-    <UserContext.Provider value='user context'>{children}</UserContext.Provider>
-  )
-}
+    <UserContext.Provider
+      value={{
+        emailPasswordLogin,
+        googleLogin,
+        loading,
+        loading2,
+        error2,
+        error,
+        user,
+        user2,
+        signOutUser,
+        createUserWithEmailAndPassword,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
 // make sure use
 export const useUserContext = () => {
-  return useContext(UserContext)
-}
+  return useContext(UserContext);
+};

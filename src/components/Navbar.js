@@ -8,6 +8,8 @@ import { NavContainer } from "../styles/NavBar.styles";
 
 const Nav = () => {
   const { openSideBar } = useProductsContext();
+  const { user, user2 } = useUserContext();
+  const isUserLoggedIn = user || user2;
   return (
     <div>
       <NavContainer>
@@ -30,6 +32,11 @@ const Nav = () => {
             <li>
               <Link to="/products">Products</Link>
             </li>
+            {isUserLoggedIn && (
+              <li>
+                <Link to="/checkout">Checkout</Link>
+              </li>
+            )}
           </ul>
           <div className="cart-btn-wrapper">
             <CartButtons />

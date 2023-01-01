@@ -5,13 +5,15 @@ import { Wrapper } from "../styles/CartButtons.styles";
 import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
+import { useSignOut } from "react-firebase-hooks/auth";
+import { auth } from "../firebase.init";
 
 const CartButtons = () => {
   const { user, user2, signOutUser } = useUserContext();
+  const [signOut, loading, error] = useSignOut(auth);
   const isuserLoggedIn = user || user2;
   const { closeSideBar } = useProductsContext();
   const { totalItems } = useCartContext();
-  console.log(isuserLoggedIn, "kuutgiy");
   return (
     <>
       <Wrapper>
@@ -23,7 +25,7 @@ const CartButtons = () => {
           </span>
         </Link>
         {isuserLoggedIn ? (
-          <button className="auth-btn" onClick={() => signOutUser()}>
+          <button className="auth-btn" onClick={signOutUser}>
             LogOut <FaUserMinus />
           </button>
         ) : (

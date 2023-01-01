@@ -3,9 +3,8 @@ import { Wrapper } from "../styles/Login.styles";
 import { useState } from "react";
 import { useUserContext } from "../context/user_context";
 import { Link, useNavigate } from "react-router-dom";
-import { FaTruckLoading } from "react-icons/fa";
-import { useEffect } from "react";
 import { Loading } from "../components";
+import { FaGoogle } from "react-icons/fa";
 
 function Login() {
   const navigate = useNavigate();
@@ -56,14 +55,20 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <Link to="/register">Don't have anccount register</Link>
+        <p className="link">
+          Don't have anccount
+          <span className="login">
+            <Link to="/register"> register</Link>
+          </span>
+        </p>
+
         <br />
         <button type="submit" className="btn">
           Login
         </button>
         <br />
         <button className="btn" onClick={googleLoginHandle}>
-          googleLogin
+          <FaGoogle />
         </button>
         {IsError && <p>An error occured</p>}
       </form>

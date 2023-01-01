@@ -22,10 +22,16 @@ export const UserProvider = ({ children }) => {
   const googleLogin = () => {
     signInWithGoogle();
   };
-  const signOutUser = async () => {
-    await signOut();
-    console.log("first");
+  const signOutUser = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   };
+
   return (
     <UserContext.Provider
       value={{
@@ -45,7 +51,7 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
-// make sure use
+
 export const useUserContext = () => {
   return useContext(UserContext);
 };
